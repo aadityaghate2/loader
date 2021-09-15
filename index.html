@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { display : block; }
+
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+		<script type="module" src="GLTFLoader.js"></script>
+
+		<script type="module">
+			
+                                  import {GLTFLoader} from './GLTFLoader.js';
+
+
+                                  const scene = new THREE.Scene();
+			                      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			                      const renderer = new THREE.WebGLRenderer();
+			                      renderer.setSize( window.innerWidth, window.innerHeight );
+		                          document.body.appendChild( renderer.domElement );
+
+
+		                          const loader = new GLTFLoader();
+
+		                          var obj ;
+
+		                          loader.load( 'pixego.glb', function ( gltf ) {
+
+                                  obj = gltf.scene;
+	                              scene.add( gltf.scene );
+
+
+	                              });
+            
+								   //scene.background = new THREE.Color(0xffffff)
+
+	                              var light = new THREE.HemisphereLight( 0xffffff , 0x000000 , 3 ) ;
+	                              scene.add(light);
+	                              camera.position.set( 0,3,10);
+
+
+	                              const animate = function () {
+				                  requestAnimationFrame( animate );
+                                  obj.rotation.y += 0.01;
+								  //obj.rotation.z += 0.01;
+				
+				                  renderer.render( scene, camera );
+		                     	 };
+
+			                     animate();
+
+
+
+
+		</script>
+	
+
+
+
+
+
+		</script>
+	</body>
+</html>
